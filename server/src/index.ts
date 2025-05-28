@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import path from 'path'
-const clientBuildPath = path.join(process.cwd(), 'client', 'dist')
+const clientBuildPath = path.join(process.cwd(), '../', 'client', 'dist')
 
 import { RedisStore } from 'connect-redis'
 import cookieParser from 'cookie-parser'
@@ -42,7 +42,7 @@ app.use(
       maxAge: 3600000, // 1h
       path: '/',
       httpOnly: true,
-      secure: true, // false
+      secure: false, // true
       sameSite: 'lax', // for stripe redirects
     },
   })

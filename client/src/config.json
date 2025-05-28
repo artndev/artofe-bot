@@ -1,5 +1,5 @@
 {
-  "SERVER_URL": "https://j-snkrs.vercel.app",
+  "SERVER_URL": "http://localhost:8000",
   "currencyCodes": {
     "usd": "$",
     "eur": "€"
