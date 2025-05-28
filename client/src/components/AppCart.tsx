@@ -6,7 +6,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { useAuthContext } from '@/contexts/Auth'
 import {
   addProduct,
   getProducts,
@@ -18,13 +17,12 @@ import { CreditCard, Minus, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from '../axios.js'
-import { useReduxDispatch, useReduxSelector } from '../hooks/redux'
+import { useReduxDispatch, useReduxSelector } from '../hooks/useRedux.js'
 import '../styles/css/Cart.css'
 import { Button } from './ui/button'
 
 const AppCart = () => {
   const navigate = useNavigate()
-  const { auth } = useAuthContext()
   const totalPrice = useReduxSelector(getTotalPrice)
   const products = useReduxSelector(getProducts)
   const dispatch = useReduxDispatch()
@@ -151,17 +149,7 @@ const AppCart = () => {
         </CardHeader>
         <CardContent>~{totalPrice}</CardContent>
         <CardFooter>
-          <Button
-            className="w-full"
-            onClick={() => {
-              if (!auth) {
-                navigate('/login')
-                return
-              }
-
-              makePayment()
-            }}
-          >
+          <Button className="w-full" onClick={() => makePayment()}>
             <CreditCard />
             Pay by card
           </Button>

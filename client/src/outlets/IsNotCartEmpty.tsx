@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useReduxSelector } from '../hooks/redux'
+import { useReduxSelector } from '../hooks/useRedux'
 
 const IsNotCartEmpty = () => {
   const products = useReduxSelector(state => state.cart.products)

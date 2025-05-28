@@ -14,6 +14,8 @@ import config from './config.json' with { type: 'json' }
 import * as middlewares from './middlewares.js'
 import * as routers from './routers/_routers.js'
 import './strategies/_strategies.js'
+import './bot.js' // bot is loaded here
+// import cors from 'cors'
 
 let redisClient = createClient({ url: process.env.REDIS_URL })
 redisClient.connect().catch(console.error)
@@ -42,7 +44,7 @@ app.use(
       maxAge: 3600000, // 1h
       path: '/',
       httpOnly: true,
-      secure: false, // true
+      secure: true, // false
       sameSite: 'lax', // for stripe redirects
     },
   })
@@ -60,11 +62,6 @@ passport.deserializeUser((user: Express.User, done) => {
 
 app.use('/api/products', routers.productsRouter)
 app.use('/api/orders', middlewares.isAuthenticated, routers.ordersRouter)
-app.use('/api/saves', middlewares.isAuthenticated, routers.savesRouter)
-
-app.use('/api/local', middlewares.isNotAuthenticated, routers.localRouter)
-app.use('/api/google', routers.googleRouter)
-app.use('/api/github', routers.githubRouter)
 
 app.get('/api/auth/status', middlewares.isAuthenticated, (req, res) => {
   res.status(200).json({

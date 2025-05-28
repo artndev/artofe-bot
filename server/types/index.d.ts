@@ -33,24 +33,9 @@ declare global {
   }
 
   export interface IUser extends ResultSetHeader {
-    Id?: number
-    Username: string
-    Password: string
-    Email: string
-    GoogleId: string | null
-    GithubId: string | null
+    Id: string
+    DiscountLevel: number
     Created: string
-  }
-
-  export interface ICredentials {
-    username: string
-    password: string
-    email: string
-  }
-
-  export interface ISave extends ResultSetHeader {
-    ProductId: number
-    UserId: number
   }
 
   export interface IJwtPayload extends JwtPayload {

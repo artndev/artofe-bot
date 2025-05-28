@@ -1,13 +1,6 @@
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -15,28 +8,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar'
-import { useAuthContext } from '@/contexts/Auth'
-import {
-  ChevronUp,
-  History,
-  Home,
-  ShoppingBag,
-  ShoppingBasket,
-  User2,
-} from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import axios from '../axios.js'
+import { Home, ShoppingBag, ShoppingBasket } from 'lucide-react'
 
 const items = [
   {
     title: 'Home',
     url: '/',
     icon: Home,
-  },
-  {
-    title: 'History',
-    url: '/history',
-    icon: History,
   },
   {
     title: 'Products',
@@ -48,33 +26,14 @@ const items = [
     url: '/cart',
     icon: ShoppingBasket,
   },
-  {
-    title: 'Account',
-    url: '/account',
-    icon: User2,
-  },
 ]
 
 const AppSidebar = () => {
-  const navigate = useNavigate()
-  const { auth, setAuth } = useAuthContext()
-
-  const logout = () => {
-    try {
-      axios
-        .post('/api/auth/logout')
-        .then(() => setAuth(undefined))
-        .catch(err => console.log(err))
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   return (
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>J-SNKRS</SidebarGroupLabel>
+          <SidebarGroupLabel>Artofe</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map(item => (
@@ -91,40 +50,6 @@ const AppSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <span>{auth?.Username || 'guest'}</span>
-                  <ChevronUp className="ml-auto" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                side="top"
-                className="w-[--radix-popper-anchor-width]"
-              >
-                <DropdownMenuItem onClick={() => navigate('/account')}>
-                  Account
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  onClick={() => {
-                    if (!auth) {
-                      navigate('/login')
-                      return
-                    }
-
-                    logout()
-                  }}
-                >
-                  <span>{!auth ? 'Log in' : 'Log out'}</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      </SidebarFooter>
     </Sidebar>
   )
 }

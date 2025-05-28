@@ -1,6 +1,10 @@
 export {}
 
 declare global {
+  interface Window {
+    Telegram: any
+  }
+
   export interface IAuthContext {
     auth: IUser | undefined
     setAuth: (auth: IUser | undefined) => void | undefined

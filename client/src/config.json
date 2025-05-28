@@ -1,5 +1,5 @@
 {
-  "SERVER_URL": "http://localhost:8000",
+  "SERVER_URL": "https://star-sheep-quietly.ngrok-free.app",
   "currencyCodes": {
     "usd": "$",
     "eur": "€"

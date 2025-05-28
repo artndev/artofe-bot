@@ -1,5 +1,5 @@
 {
   "SERVER_PORT": 8000,
-  "CLIENT_URL": "http://localhost:8000",
-  "SERVER_URL": "http://localhost:8000"
+  "CLIENT_URL": "https://star-sheep-quietly.ngrok-free.app",
+  "SERVER_URL": "https://star-sheep-quietly.ngrok-free.app"
 }

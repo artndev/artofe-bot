@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { useAuthContext } from '@/contexts/Auth.js'
 import { addProduct, removeProduct } from '@/pizza_slices/Cart'
 import { Circle, CircleCheck, Heart, HeartOff, Minus, Plus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
@@ -15,7 +14,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from '../axios.js'
 import config from '../config.json'
-import { useReduxDispatch, useReduxSelector } from '../hooks/redux'
+import { useReduxDispatch, useReduxSelector } from '../hooks/useRedux.js'
 import '../styles/css/ProductFront.css'
 
 const AppProductFront: React.FC<IProductFrontProps> = ({
@@ -30,7 +29,6 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
 }) => {
   const navigate = useNavigate()
   const colors: string[] = Object.keys(sizes)
-  const { auth } = useAuthContext()
   const [variant, setVariant] = useState<IVariant | undefined>(undefined)
   const [color, setColor] = useState<string | undefined>(undefined)
   const [colorImage, setColorImage] = useState<string | undefined>(undefined)
@@ -169,24 +167,6 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
             </div>
           )}
           <div className="flex gap-[5px] w-full">
-            <Button
-              size={'icon'}
-              onClick={() => {
-                if (!auth) {
-                  navigate('/login')
-                  return
-                }
-
-                if (isSaved) {
-                  unsaveProduct()
-                  return
-                }
-
-                saveProduct()
-              }}
-            >
-              {!isSaved ? <Heart /> : <HeartOff />}
-            </Button>
             {products[id]?.[JSON.stringify(variant)] && (
               <Button
                 size={'icon'}

@@ -8,12 +8,12 @@ const AppHome = () => {
     <div className="flex flex-col gap-[10px]">
       <div className="flex flex-col gap-[5px]">
         <h3 className="leading-none text-xl font-bold">
-          J-SNKRS — yours way into sneakers!
+          Artofe — yours way into coffee!
         </h3>
-        <span className="text-muted-foreground">Nike SNKRS from JAPAN</span>
+        <span className="text-muted-foreground">Authentic Coffee Arabica</span>
       </div>
       <Link to={'/products'} className="text-muted hover:underline">
-        Browse catalog...
+        Browse menu...
       </Link>
       <div className="flex gap-[5px]">
         <a href="https://github.com/artndev">
