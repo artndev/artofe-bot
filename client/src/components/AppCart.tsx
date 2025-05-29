@@ -41,7 +41,6 @@ const AppCart = () => {
         return
       }
 
-      alert(user.id.toString())
       const res = await axios.post('/api/orders/checkout', {
         userId: user.id.toString(),
         products: products,
@@ -54,8 +53,6 @@ const AppCart = () => {
 
       if (checkout.error) alert(checkout.error.message)
     } catch (err) {
-      alert(JSON.stringify(err))
-
       console.log(err)
     }
   }

@@ -1,13 +1,20 @@
 import AppHome from '@/components/AppHome'
 import { useTelegram } from '@/hooks/useTelegram'
 import { useEffect } from 'react'
+import axios from '../axios.js'
 
 const Home = () => {
   const { tg, user } = useTelegram()
 
   useEffect(() => {
-    tg.ready()
-    alert(`Web App is Loaded!\n${JSON.stringify(user)}`)
+    axios
+      .post(`/api/login?id=${user.id}`)
+      .then(() => tg.ready())
+      .catch(err => {
+        console.log(err)
+
+        tg.ready()
+      })
   }, [])
 
   return (

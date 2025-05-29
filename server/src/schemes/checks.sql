@@ -1,4 +1,4 @@
-CREATE TABLE ChecksArtofe (
+CREATE TABLE Checks(
     ReferenceId VARCHAR(255) NOT NULL,
     LineItems TEXT NOT NULL,
     TotalPrice VARCHAR(50) NOT NULL,

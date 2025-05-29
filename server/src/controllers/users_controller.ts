@@ -5,19 +5,19 @@ export default {
   Login: async (id: string) => {
     try {
       const [rows] = await pool.query<IUser[]>(
-        'SELECT * FROM UsersArtofe WHERE Id = ?;',
+        'SELECT * FROM Users WHERE Id = ?;',
         [id]
       )
 
       if (rows.length === 0) {
         await pool.query<ResultSetHeader>(
-          'INSERT INTO UsersArtofe (Id) VALUES (?);',
+          'INSERT INTO Users (Id) VALUES (?);',
           [id]
         )
       }
 
       const [rows2] = await pool.query<IUser[]>(
-        'SELECT * FROM UsersArtofe WHERE Id = ?;',
+        'SELECT * FROM Users WHERE Id = ?;',
         [id]
       )
 

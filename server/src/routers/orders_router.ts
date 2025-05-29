@@ -17,7 +17,7 @@ router.get('/success', ordersController.createCheck, (_req, res) => {
         </script>
       </head>
       <body>
-        Transaction was <strong>successful</strong>. Redirecting to history page...
+        Transaction was <strong>successful</strong>. Redirecting to products page...
       </body>
     </html>
   `)

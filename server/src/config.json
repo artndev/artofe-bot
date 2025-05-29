@@ -3,8 +3,31 @@
   "CLIENT_URL": "https://star-sheep-quietly.ngrok-free.app",
   "SERVER_URL": "https://star-sheep-quietly.ngrok-free.app",
   "DISCOUNT_LEVELS": {
-    "50": "Bronze",
-    "100": "Silver",
-    "150": "Gold"
+    "10": {
+      "name": "Bronze",
+      "discount": "5"
+    },
+    "20": {
+      "name": "Silver",
+      "discount": "10"
+    },
+    "30": {
+      "name": "Gold",
+      "discount": "15"
+    }
+  },
+  "DISCOUNT_LEVELS_REVERSED": {
+    "Bronze": {
+      "amount": "10",
+      "discount": "5"
+    },
+    "Silver": {
+      "amount": "20",
+      "discount": "10"
+    },
+    "Gold": {
+      "amount": "30",
+      "discount": "15"
+    }
   }
 }

@@ -8,6 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import config from '../config.json' with { type: 'json' }
 import pool from '../pool.js'
 import jwt from 'jsonwebtoken'
+import { ordersController } from './_controllers.js'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET!)
 
@@ -17,8 +18,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       price_data: {
         currency: product.currency,
         product_data: {
-          name: `${product.name} • ${product.variant.color.charAt(0).toUpperCase() + product.variant.color.slice(1)} • 
-            M ${product.variant.size.M} / W ${product.variant.size.W}`,
+          name: `${product.name} • ${product.variant.color} • ${product.variant.size}`,
           images: [product.variant.image],
           metadata: {
             id: product.id,
@@ -29,11 +29,12 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       quantity: product.quantity,
     }))
     const referenceId = uuidv4()
+    const userId = req.body.userId
 
     const token = jwt.sign(
       {
         jti: uuidv4(),
-        userId: req.body.userId,
+        userId: userId,
         referenceId: referenceId,
         lineItems: JSON.stringify(lineItems),
         totalPrice: req.body.totalPrice,
@@ -45,14 +46,38 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       }
     )
 
-    const session = await stripe.checkout.sessions.create({
+    const sessionData = {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
       success_url: `${config.SERVER_URL}/api/orders/success?token=${token}`,
       cancel_url: `${config.SERVER_URL}/api/orders/cancel`,
       client_reference_id: referenceId,
-    })
+    }
+    const discountData = await ordersController.getDiscountLevel(userId)
+    const discountLevel = Number(
+      discountData.answer?.DiscountLevel?.discount || 0
+    )
+
+    console.log(discountLevel)
+    let newSessionData = {}
+    if (discountLevel) {
+      const coupon = await stripe.coupons.create({
+        percent_off: discountLevel,
+        duration: 'once',
+      })
+
+      newSessionData = {
+        ...sessionData,
+        discounts: [
+          {
+            coupon: coupon.id,
+          },
+        ],
+      }
+    } else newSessionData = sessionData
+
+    const session = await stripe.checkout.sessions.create(newSessionData)
 
     res.status(200).json({
       message: 'You have successfully created check',
@@ -79,7 +104,7 @@ const createCheck = async (req: Request, res: Response, next: NextFunction) => {
     const data = jwt.decode(token) as IJwtPayload
 
     const [rows] = await pool.query<IProduct[]>(
-      'SELECT * FROM ChecksArtofe WHERE ReferenceId = ? AND UserId = ?;',
+      'SELECT * FROM Checks WHERE ReferenceId = ? AND UserId = ?;',
       [data.referenceId, data.userId]
     )
 
@@ -92,7 +117,7 @@ const createCheck = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     await pool.query<ResultSetHeader>(
-      'INSERT INTO ChecksArtofe (ReferenceId, LineItems, TotalPrice, UserId) VALUES (?, ?, ?, ?);',
+      'INSERT INTO Checks (ReferenceId, LineItems, TotalPrice, UserId) VALUES (?, ?, ?, ?);',
       [data.referenceId, data.lineItems, data.totalPrice, data.userId]
     )
 
@@ -110,7 +135,7 @@ const createCheck = async (req: Request, res: Response, next: NextFunction) => {
 const getChecks = async (id: string) => {
   try {
     const [rows] = await pool.query<ICheck[]>(
-      'SELECT * FROM ChecksArtofe WHERE UserId = ?;',
+      'SELECT * FROM Checks WHERE UserId = ?;',
       [id]
     )
 
@@ -134,10 +159,10 @@ const getDiscountLevel = async (id: string) => {
     let discountLevel = null
 
     const answer = checks?.answer
-    if (!answer) throw new Error('Checks were not loaded')
+    if (!answer) throw new Error('Checks have not been loaded')
 
-    for (const [key, level] of Object.entries(config.DISCOUNT_LEVELS)) {
-      if (answer.length.toString() >= key) discountLevel = level
+    for (const [key, val] of Object.entries(config.DISCOUNT_LEVELS)) {
+      if (answer.length >= Number(key)) discountLevel = val
     }
 
     return {

@@ -34,7 +34,7 @@ declare global {
     totalProductPriceCoded: string
     variant: {
       color: string
-      size: ISize
+      size: string
       image: string
     }
   }
@@ -58,5 +58,20 @@ declare global {
     LineItems: string
     TotalPrice: string
     UserId: string
+  }
+
+  export interface ILineItem {
+    price_data: {
+      currency: ICurrency
+      product_data: {
+        name: string
+        images: string[]
+        metadata: {
+          id: number
+        }
+      }
+      unit_amount: number
+    }
+    quantity: number
   }
 }
