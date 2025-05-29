@@ -33,6 +33,7 @@ const createCheckoutSession = async (req: Request, res: Response) => {
     const token = jwt.sign(
       {
         jti: uuidv4(),
+        userId: req.body.userId,
         referenceId: referenceId,
         lineItems: JSON.stringify(lineItems),
         totalPrice: req.body.totalPrice,
@@ -71,7 +72,6 @@ const createCheckoutSession = async (req: Request, res: Response) => {
 
 const createCheck = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const userId = req.user!.Id
     const token = req.query.token as string
 
     jwt.verify(token, process.env.JWT_SECRET!)
@@ -79,8 +79,8 @@ const createCheck = async (req: Request, res: Response, next: NextFunction) => {
     const data = jwt.decode(token) as IJwtPayload
 
     const [rows] = await pool.query<IProduct[]>(
-      'SELECT * FROM Checks WHERE ReferenceId = ? AND UserId = ?;',
-      [data.referenceId, userId]
+      'SELECT * FROM ChecksArtofe WHERE ReferenceId = ? AND UserId = ?;',
+      [data.referenceId, data.userId]
     )
 
     if (rows.length) {
@@ -92,8 +92,8 @@ const createCheck = async (req: Request, res: Response, next: NextFunction) => {
     }
 
     await pool.query<ResultSetHeader>(
-      'INSERT INTO Checks (ReferenceId, LineItems, TotalPrice, UserId) VALUES (?, ?, ?, ?);',
-      [data.referenceId, data.lineItems, data.totalPrice, userId]
+      'INSERT INTO ChecksArtofe (ReferenceId, LineItems, TotalPrice, UserId) VALUES (?, ?, ?, ?);',
+      [data.referenceId, data.lineItems, data.totalPrice, data.userId]
     )
 
     next()
@@ -109,8 +109,8 @@ const createCheck = async (req: Request, res: Response, next: NextFunction) => {
 
 const getChecks = async (id: string) => {
   try {
-    const [rows] = await pool.query<IProduct[]>(
-      'SELECT * FROM Checks WHERE UserId = ?;',
+    const [rows] = await pool.query<ICheck[]>(
+      'SELECT * FROM ChecksArtofe WHERE UserId = ?;',
       [id]
     )
 

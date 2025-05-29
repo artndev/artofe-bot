@@ -4,8 +4,6 @@ import { ordersController } from '../controllers/_controllers.js'
 
 const router = express.Router()
 
-router.get('/', ordersController.getChecks)
-
 router.post('/checkout', ordersController.createCheckoutSession)
 
 router.get('/success', ordersController.createCheck, (_req, res) => {
@@ -14,7 +12,7 @@ router.get('/success', ordersController.createCheck, (_req, res) => {
       <head>
         <script>
           setTimeout(function() {
-            window.location.href = "${config.CLIENT_URL}/history";
+            window.location.href = "${config.CLIENT_URL}/products";
           }, 3000);
         </script>
       </head>

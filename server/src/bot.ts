@@ -26,7 +26,6 @@ If you want to go further, select the particular option below my message. Enjoy 
           [{ text: '👤 Account Info', callback_data: 'account' }],
           [{ text: '🔄️ History', callback_data: 'history' }],
           [{ text: '✨ Discount Levels', callback_data: 'discount' }],
-          [{ text: '📪 Feedback Form', callback_data: 'feedback' }],
         ],
       },
       parse_mode: 'Markdown',
@@ -45,7 +44,7 @@ bot.on('callback_query', async query => {
     const answer = data?.answer
     const discountLevel = answer?.DiscountLevel
     const checks = answer?.Checks
-    // console.log(checks)
+    console.log(checks)
 
     switch (query.data) {
       case 'account':
@@ -94,7 +93,7 @@ bot.on('callback_query', async query => {
 ${
   checks?.length
     ? checks.map((check, i) => {
-        return `${i + 1}. *${check.Name} — ${check.Price}${check.Currency}*\n\`${check.Id}\`\n`
+        return `${i + 1}. *Check — ${check.TotalPrice}*\n\`${check.ReferenceId}\`\n`
       })
     : 'Your history is empty...'
 }

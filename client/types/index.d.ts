@@ -49,26 +49,4 @@ declare global {
     variant: IVariant
     quantity: number
   }
-
-  export interface ICheck {
-    ReferenceId: string
-    LineItems: string
-    TotalPrice: string
-    UserId: number
-  }
-
-  export interface ILineItem {
-    price_data: {
-      currency: ICurrency
-      product_data: {
-        name: string
-        images: string[]
-        metadata: {
-          id: number
-        }
-      }
-      unit_amount: number
-    }
-    quantity: number
-  }
 }

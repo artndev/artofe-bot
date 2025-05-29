@@ -5,13 +5,8 @@ import pool from '../pool.js'
 export default {
   Delete: async (req: Request, res: Response) => {
     try {
-      await pool.query<ResultSetHeader>(
-        'DELETE FROM Saves WHERE ProductId = ?;',
-        [req.params.id]
-      )
-
       const [rows] = await pool.query<ResultSetHeader>(
-        'DELETE FROM Products WHERE Id = ?;',
+        'DELETE FROM ProductsArtofe WHERE Id = ?;',
         [req.params.id]
       )
 
@@ -39,7 +34,7 @@ export default {
   Create: async (req: Request, res: Response) => {
     try {
       await pool.query<ResultSetHeader>(
-        'INSERT INTO Products (Name, Price, Currency) VALUES (?, ?, ?);',
+        'INSERT INTO ProductsArtofe (Name, Price, Currency) VALUES (?, ?, ?);',
         [req.body.name, req.body.price, req.body.currency]
       )
 
@@ -60,7 +55,7 @@ export default {
     try {
       const [rows] = await pool.query<ResultSetHeader>(
         `
-          UPDATE Products SET 
+          UPDATE ProductsArtofe SET 
             Name = ?, 
             Price = ?,
             Currency = ?, 
@@ -93,7 +88,9 @@ export default {
   },
   GetAll: async (_req: Request, res: Response) => {
     try {
-      const [rows] = await pool.query<IProduct[]>('SELECT * FROM Products')
+      const [rows] = await pool.query<IProduct[]>(
+        'SELECT * FROM ProductsArtofe'
+      )
 
       res.status(200).json({
         message: 'You have successfully got all entries',
@@ -111,7 +108,7 @@ export default {
   Get: async (req: Request, res: Response) => {
     try {
       const [rows] = await pool.query<IProduct[]>(
-        'SELECT * FROM Products WHERE Id = ?;',
+        'SELECT * FROM ProductsArtofe WHERE Id = ?;',
         [req.params.id]
       )
 

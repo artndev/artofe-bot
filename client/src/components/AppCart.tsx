@@ -6,6 +6,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { useTelegram } from '@/hooks/useTelegram.js'
 import {
   addProduct,
   getProducts,
@@ -14,7 +15,6 @@ import {
 } from '@/pizza_slices/Cart'
 import { loadStripe } from '@stripe/stripe-js'
 import { CreditCard, Minus, Plus } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 import axios from '../axios.js'
 import { useReduxDispatch, useReduxSelector } from '../hooks/useRedux.js'
@@ -22,7 +22,7 @@ import '../styles/css/Cart.css'
 import { Button } from './ui/button'
 
 const AppCart = () => {
-  const navigate = useNavigate()
+  const { user } = useTelegram()
   const totalPrice = useReduxSelector(getTotalPrice)
   const products = useReduxSelector(getProducts)
   const dispatch = useReduxDispatch()
@@ -41,7 +41,9 @@ const AppCart = () => {
         return
       }
 
+      alert(user.id.toString())
       const res = await axios.post('/api/orders/checkout', {
+        userId: user.id.toString(),
         products: products,
         totalPrice: totalPrice,
       })
@@ -52,6 +54,8 @@ const AppCart = () => {
 
       if (checkout.error) alert(checkout.error.message)
     } catch (err) {
+      alert(JSON.stringify(err))
+
       console.log(err)
     }
   }

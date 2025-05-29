@@ -8,7 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { addProduct, removeProduct } from '@/pizza_slices/Cart'
-import { Circle, CircleCheck, Heart, HeartOff, Minus, Plus } from 'lucide-react'
+import { Circle, CircleCheck, Minus, Plus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
@@ -27,7 +27,6 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
   sizes,
   image,
 }) => {
-  const navigate = useNavigate()
   const colors: string[] = Object.keys(sizes)
   const [variant, setVariant] = useState<IVariant | undefined>(undefined)
   const [color, setColor] = useState<string | undefined>(undefined)
@@ -69,28 +68,6 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
       console.log(err)
     }
   }, [])
-
-  const saveProduct = () => {
-    try {
-      axios
-        .post(`/api/saves/${id}/save`)
-        .then(() => setIsSaved(true))
-        .catch(err => console.log(err))
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
-  const unsaveProduct = () => {
-    try {
-      axios
-        .post(`/api/saves/${id}/unsave`)
-        .then(() => setIsSaved(false))
-        .catch(err => console.log(err))
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   return (
     <div className="product__front-subcontainer grid grid-cols-[repeat(2_,1fr)] grid-rows-[max-content] gap-[10px] w-[min(1000px,_100%)]">
