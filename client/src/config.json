@@ -1,5 +1,5 @@
 {
-  "SERVER_URL": "https://artofe-backend.vercel.app",
+  "SERVER_URL": "https://artofe.up.railway.app",
   "currencyCodes": {
     "usd": "$",
     "eur": "€"
