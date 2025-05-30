@@ -31,7 +31,7 @@ app.post('/api/login', async (req, res) => {
   })
 }) // ?id=
 
-const port = config.SERVER_PORT
+const port = process.env.PORT || config.SERVER_PORT
 app.listen(port, () =>
   console.log(`Server listening on port ${port}\nhttp://localhost:${port}`)
 )
