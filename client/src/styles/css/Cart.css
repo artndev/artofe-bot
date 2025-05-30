@@ -1,0 +1,5 @@
+@media screen and (max-width: 1000px) {
+  .cart__subcontainer {
+    grid-template-columns: 100% !important;
+  }
+}
