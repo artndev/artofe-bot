@@ -1,14 +1,13 @@
-> J-SNKRS — yours way into sneakers! Nike SNKRS from JAPAN
+> Artofe — yours way into coffee! Authentic Coffee Arabica
 
-You can find there the source code of sneakers store. It includes:
+You can find there the source code of coffee shop. It includes:
 
-- The basic manipulation of products and favorites of each user
 - The payment system based on [Stripe](https://github.com/stripe/stripe-node)
 - The cart system built using Redux reducers and selectors
-- The authorization system based on [Passport-Local Strategy](https://github.com/jaredhanson/passport-local), [Passport-Google-OAuth2 Strategy](https://github.com/jaredhanson/passport-google-oauth2) with [Passport-Github-OAuth2 Strategy](https://github.com/cfsghost/passport-github) and JWT; the implementation of social networks attaching.
+- The authorization system via Telegram Web Apps and JWT
 - The deployment on Vercel
 
-P.S.: All the public data is fetched from [Nike](https://www.nike.com/). Big thanks!
+P.S.: All the public data is fetched from [Starbucks](https://www.starbucks.com/). Big thanks!
 
 ## Tech Stack
 
@@ -25,5 +24,5 @@ P.S.: All the public data is fetched from [Nike](https://www.nike.com/). Big tha
 <img src="./assets/redux.svg" width=50 />&nbsp;&nbsp;&nbsp;
 <img src="./assets/tailwind.svg" width=50 />&nbsp;&nbsp;&nbsp;
 <img src="./assets/express.svg" width=50 />&nbsp;&nbsp;&nbsp;&nbsp;
-<img src="./assets/redis.svg" width=50 />&nbsp;&nbsp;&nbsp;
-<img src="./assets/mysql.svg" width=50 />&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="./assets/mysql.svg" width=50 />&nbsp;&nbsp;
+<img src="./assets/telegram.svg" width=50 />

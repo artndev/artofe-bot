@@ -2,7 +2,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import path from 'path'
-const clientBuildPath = path.join(process.cwd(), '../', 'client', 'dist')
+const clientBuildPath = path.join(process.cwd(), 'client', 'dist')
 
 import express from 'express'
 import './bot.js' // bot is loaded here

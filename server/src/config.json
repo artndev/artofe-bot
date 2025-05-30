@@ -1,7 +1,7 @@
 {
   "SERVER_PORT": 8000,
-  "CLIENT_URL": "https://star-sheep-quietly.ngrok-free.app",
-  "SERVER_URL": "https://star-sheep-quietly.ngrok-free.app",
+  "CLIENT_URL": "https://artofe.vercel.app",
+  "SERVER_URL": "https://artofe.vercel.app",
   "DISCOUNT_LEVELS": {
     "10": {
       "name": "Bronze",
