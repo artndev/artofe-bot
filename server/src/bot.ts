@@ -16,10 +16,11 @@ const bot = new TelegramBot(process.env.BOT_TOKEN!, { polling: true })
 
 bot.onText(/\/start/, async msg => {
   try {
+    const username = msg.from?.username?.replace(/([_])/g, '\\$1')
     bot.sendMessage(
       msg.chat.id,
       `
-Hello @${msg.from?.username?.replace(/([_])/g, '\\$1')}! Welcome to the coffee shop — *Artofe* ☕
+Hello ${username ? `@${username}` : 'guest'}! Welcome to the coffee shop — *Artofe* ☕
 
 If you want to go further, select the particular option below my message. Enjoy yourself!
     `,
@@ -44,6 +45,7 @@ If you want to go further, select the particular option below my message. Enjoy 
 bot.on('callback_query', async query => {
   try {
     const id = query.from.id.toString()
+    const username = query.from.username?.replace(/([_])/g, '\\$1')
 
     const res = await usersController.Login(id)
     if (!res) throw new Error('User is not authorized')
@@ -59,7 +61,7 @@ bot.on('callback_query', async query => {
           `
 👤 *Account Info*
 ━━━━━━━━━━━━━━━━━━
-Username — @${query.from.username}  
+Username — ${username ? `@${username}` : 'guest'}  
 ID — \`${query.from.id}\`
 Purchases — *x${checks?.length || 0}*
 Discount Level — *${discountLevel?.name || 'None'}*
