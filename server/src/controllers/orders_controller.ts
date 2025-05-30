@@ -59,7 +59,6 @@ const createCheckoutSession = async (req: Request, res: Response) => {
       discountData.answer?.DiscountLevel?.discount || 0
     )
 
-    console.log(discountLevel)
     let newSessionData = {}
     if (discountLevel) {
       const coupon = await stripe.coupons.create({

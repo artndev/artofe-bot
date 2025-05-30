@@ -5,7 +5,7 @@ You can find there the source code of coffee shop. It includes:
 - The payment system based on [Stripe](https://github.com/stripe/stripe-node)
 - The cart system built using Redux reducers and selectors
 - The authorization system via Telegram Web Apps and JWT
-- The deployment on Vercel
+- The deployment on Vercel / Railway
 
 P.S.: All the public data is fetched from [Starbucks](https://www.starbucks.com/). Big thanks!
 
