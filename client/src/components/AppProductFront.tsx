@@ -30,7 +30,6 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
   const [variant, setVariant] = useState<IVariant | undefined>(undefined)
   const [color, setColor] = useState<string | undefined>(undefined)
   const [colorImage, setColorImage] = useState<string | undefined>(undefined)
-  const [isSaved, setIsSaved] = useState<boolean>(false)
   const products = useReduxSelector(state => state.cart.products)
   const dispatch = useReduxDispatch()
 
@@ -53,6 +52,10 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
 
     setColorImage(sizes[color]!.image)
   }, [color])
+
+  useEffect(() => {
+    console.log(products[id]?.[JSON.stringify(variant)], products, variant)
+  }, [variant])
 
   return (
     <div className="product__front-subcontainer grid grid-cols-[repeat(2_,1fr)] grid-rows-[max-content] gap-[10px] w-[min(1000px,_100%)]">
