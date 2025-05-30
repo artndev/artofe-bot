@@ -7,7 +7,6 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run build --prefix ../client",
     "start": "tsx watch --exclude node_modules --include src/** src/index.ts",
     "remote": "ngrok http --url=star-sheep-quietly.ngrok-free.app 8000 --config ngrok.yaml",
     "build": "tsc -b"
