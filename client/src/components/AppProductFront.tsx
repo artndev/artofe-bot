@@ -10,9 +10,8 @@ import {
 import { addProduct, removeProduct } from '@/pizza_slices/Cart'
 import { Circle, CircleCheck, Minus, Plus } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
-import axios from '../axios.js'
 import config from '../config.json'
 import { useReduxDispatch, useReduxSelector } from '../hooks/useRedux.js'
 import '../styles/css/ProductFront.css'
@@ -54,20 +53,6 @@ const AppProductFront: React.FC<IProductFrontProps> = ({
 
     setColorImage(sizes[color]!.image)
   }, [color])
-
-  useEffect(() => {
-    try {
-      axios
-        .get(`/api/saves/${id}/state`)
-        .then(res => {
-          setIsSaved(res.data.answer)
-          console.log(res)
-        })
-        .catch(err => console.log(err))
-    } catch (err) {
-      console.log(err)
-    }
-  }, [])
 
   return (
     <div className="product__front-subcontainer grid grid-cols-[repeat(2_,1fr)] grid-rows-[max-content] gap-[10px] w-[min(1000px,_100%)]">
