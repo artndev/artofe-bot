@@ -19,7 +19,7 @@ bot.onText(/\/start/, async msg => {
     bot.sendMessage(
       msg.chat.id,
       `
-Hello *${msg.from?.username?.replaceAll('_', '\\_\\')}*! Welcome to the coffee shop — *Artofe* ☕
+Hello @${msg.from?.username?.replaceAll('_', '\_\/')}! Welcome to the coffee shop — *Artofe* ☕
 
 If you want to go further, select the particular option below my message. Enjoy yourself!
     `,
