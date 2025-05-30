@@ -7,9 +7,8 @@ const clientBuildPath = path.join(process.cwd(), 'client', 'dist')
 import express from 'express'
 import './bot.js' // bot is loaded here
 import config from './config.json' with { type: 'json' }
-import * as routers from './routers/_routers.js'
-import './strategies/_strategies.js'
 import { usersController } from './controllers/_controllers.js'
+import * as routers from './routers/_routers.js'
 // import cors from 'cors'
 
 const app = express()
