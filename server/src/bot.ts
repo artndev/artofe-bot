@@ -52,8 +52,6 @@ bot.on('callback_query', async query => {
     const answer = data?.answer
     const discountLevel = answer?.DiscountLevel
     const checks = answer?.Checks
-    console.log(checks)
-
     switch (query.data) {
       case 'account':
         bot.sendMessage(
