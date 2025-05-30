@@ -7,6 +7,8 @@ const Home = () => {
   const { tg, user } = useTelegram()
 
   useEffect(() => {
+    if (!user?.id) return
+
     axios
       .post(`/api/login?id=${user.id}`)
       .then(() => tg.ready())
@@ -15,7 +17,7 @@ const Home = () => {
 
         tg.ready()
       })
-  }, [])
+  }, [user])
 
   return (
     <div className="flex justify-center items-center h-screen p-[20px]">
