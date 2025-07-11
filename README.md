@@ -132,4 +132,4 @@ npm run start
 
 ## Access Application
 
-Once the build is completed successfully, the application will be available at https://t.me/your-bot-username.
+Once the application is ready, it will be available at https://t.me/your-bot-username.
