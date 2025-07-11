@@ -92,12 +92,9 @@ Fetch a free domain from [the ngrok dashboard](https://dashboard.ngrok.com/domai
 Open the _package.json_ file located in the _server_ directory and fill in the required data:
 
 ```json
-// ...
 "scripts": {
-  // ...
   "remote": "ngrok http --url=<your-domain> 8000 --config ngrok.yaml"
 },
-//...
 ```
 
 Push front-end to a web hosting platform, such as [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/) or [Heroku](https://www.heroku.com/), to keep it up-to-date with any back-end changes.
@@ -106,10 +103,8 @@ Open the _config.json_ file located in the _server/src_ directory and fill in th
 
 ```json
 {
-  // ...
   "CLIENT_URL": "<your-front-end-domain>",
   "SERVER_URL": "<your-back-end-domain>"
-  // ...
 }
 ```
 
@@ -118,7 +113,6 @@ Open the _config.json_ file located in the _client/src_ directory and fill in th
 ```json
 {
   "SERVER_URL": "<your-back-end-domain>"
-  // ...
 }
 ```
 
