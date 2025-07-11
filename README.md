@@ -37,7 +37,7 @@ git checkout dev-public
 
 ## Configure Environmental Variables
 
-Open the _.env.local_ file located in the _client_ directory and fill in the required environmental variables:
+Open the _.env.local_ file located in the _/client_ directory and fill in the required environmental variables:
 
 ```env
 # Your Stripe credentials can be found at:
@@ -47,7 +47,7 @@ VITE_STRIPE_PUBLISHABLE_KEY=...
 VITE_STRIPE_ACCOUNT_ID=...
 ```
 
-Open the _.env.local_ file located in the _server_ directory and fill in the required environmental variables:
+Open the _.env.local_ file located in the _/server_ directory and fill in the required environmental variables:
 
 ```env
 # Your bot token can be obtained via @BotFather:
@@ -79,7 +79,7 @@ MYSQL_DBNAME=...
 
 Authorize in [the ngrok dashboard](https://dashboard.ngrok.com/get-started/your-authtoken) to fetch your authorization token in order to create a reverse proxy for running the application locally.
 
-Open the _ngrok.yaml_ file located in the _server_ directory and fill in the required data:
+Open the _ngrok.yaml_ file located in the _/server_ directory and fill in the required data:
 
 ```yaml
 version: '3'
@@ -89,7 +89,7 @@ agent:
 
 Fetch a free domain from [the ngrok dashboard](https://dashboard.ngrok.com/domains) to make the server running on it.
 
-Open the _package.json_ file located in the _server_ directory and fill in the required data:
+Open the _package.json_ file located in the _/server_ directory and fill in the required data:
 
 ```json
 "scripts": {
@@ -99,7 +99,7 @@ Open the _package.json_ file located in the _server_ directory and fill in the r
 
 Push front-end to a web hosting platform, such as [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/) or [Heroku](https://www.heroku.com/), to keep it up-to-date with any back-end changes.
 
-Open the _config.json_ file located in the _server/src_ directory and fill in the required data:
+Open the _config.json_ file located in the _/server/src_ directory and fill in the required data:
 
 ```json
 {
@@ -108,7 +108,7 @@ Open the _config.json_ file located in the _server/src_ directory and fill in th
 }
 ```
 
-Open the _config.json_ file located in the _client/src_ directory and fill in the required data:
+Open the _config.json_ file located in the _/client/src_ directory and fill in the required data:
 
 ```json
 {
