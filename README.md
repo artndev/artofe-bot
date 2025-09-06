@@ -50,6 +50,9 @@ VITE_STRIPE_ACCOUNT_ID=...
 Open the _.env.local_ file located in the _/server_ directory and fill in the required environmental variables:
 
 ```env
+# Table schemas can be found in server\src\schemas folder
+# They are needed to create the same environment as mine
+
 # Your bot token can be obtained via @BotFather:
 # https://t.me/BotFather
 BOT_TOKEN=...
@@ -58,22 +61,22 @@ BOT_TOKEN=...
 # https://dashboard.stripe.com/test/dashboard
 STRIPE_SECRET=...
 
-# UUIDv4 secret used for generating tokens
-# To generate UUIDv4 secret, follow link below:
-# https://www.uuidgenerator.net/version4.
+# UUIDv4 secrets used for access to secured destinations
 JWT_SECRET=...
 
-# Port remains untouchable
 PORT=8000
 
 # Your DB credentials
-# Table schemas can be found in server\src\schemas
 MYSQL_HOST=...
 MYSQL_PORT=...
 MYSQL_USER=...
 MYSQL_PASSWORD=...
 MYSQL_DBNAME=...
 ```
+
+## Useful Links
+
+- [UUIDv4 generator](https://www.uuidgenerator.net/version4)
 
 ## Configure Ngrok
 
