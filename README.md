@@ -1,3 +1,11 @@
+<p align="middle">
+    <img src="./assets/artofe.png" width=200 />
+</p>
+
+<h3 align="middle">
+    Artofe
+</h3>
+
 ## Quick Overview
 
 _Artofe — yours way into coffee! Authentic Coffee Arabica_
